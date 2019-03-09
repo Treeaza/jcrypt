@@ -8,10 +8,8 @@
 #ifndef UTIL_H_
 #define UTIL_H_
 
-#include <iostream>
-#include <string.h>
-
 bool checkConfirmation(const char*, bool easy = false);
 void toUpperStr(char*);
+int powi(int, int);
 
 #endif /* UTIL_H_ */

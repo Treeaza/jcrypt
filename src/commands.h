@@ -8,10 +8,6 @@
 #ifndef COMMANDS_H_
 #define COMMANDS_H_
 
-#include <iostream>
-#include <fstream>
-#include "encrypt.h"
-
 bool cmd_help(int argc, char** argv);
 bool cmd_encrypt(int argc, char** argv);
 bool cmd_decrypt(int argc, char** argv);

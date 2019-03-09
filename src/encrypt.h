@@ -8,8 +8,10 @@
 #ifndef ENCRYPT_H_
 #define ENCRYPT_H_
 
-#include <iostream>
+//Very secure, of course. You can literally read it on Github.
+const char STANDARD_BITMASK = 0b01110101;
+const char STANDARD_BITMASK_CODE[] = "s";
 
-void encrypt(char*, int, int, char**);
+bool encrypt(char*, int, int, char**);
 
 #endif /* ENCRYPT_H_ */
