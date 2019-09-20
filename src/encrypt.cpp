@@ -36,7 +36,7 @@ void enc_bitmask(char*, int, char);
 void enc_reverseBytes(char*, int);
 
 struct encryptionOrder {
-	char bitmasks[16];
+	char bitmasks[16] = { 0 };
 	int maskCount = 0;
 	bool saveOrder = false;
 
@@ -74,13 +74,18 @@ struct encryptionOrder {
 		cout << "The encryption stack now contains:\n";
 		cout << "    Bitmasks:\n";
 		for (char i = 0; i < 16; i++) {
-			cout << "    -" << (char)(i <= 9 ? i + '0' : i + 'a' - 10) << ": "
+			cout << "    -" << (char) (i <= 9 ? i + '0' : i + 'a' - 10) << ": "
 					<< bitmasks[i - '0'] << "\n";
 		}
-		cout << "    Order:\n";
-		encFuncToken* on = head;
-		for (int i = 0; i < length; i++) {
-			cout << "    -" << on->toString() << "\n";
+		cout << "    Order:\n.....";
+		cout << "checking if head is null";
+		if (head != NULL) {
+			cout << "head not null";
+			encFuncToken* on = head;
+			for (int i = 0; i < length; i++) {
+				cout << "I AM A THING YES.";
+				cout << "    -" << on->toString() << "\n";
+			}
 		}
 	}
 };
@@ -134,6 +139,7 @@ bool encrypt(char* text, int length, int argc, char** argv) {
 	encryptionOrder stack = readArguments(argv, argc);
 
 	stack.printStack();
+	cout << "HELLO YES WE ARE HERE THAT IS GOOD";
 	if (stack.valid) {
 		//Now we need to go through and run the stack.
 		encFuncToken* tk = stack.head;
@@ -153,10 +159,11 @@ bool encrypt(char* text, int length, int argc, char** argv) {
  */
 encryptionOrder readArguments(char** argv, int argc) {
 	cout << "EncFunc";
+
 	//There can only be 16 bitmasks, fill them with 0s for now, to be safe.
 	encryptionOrder order;
-	memset(order.bitmasks, 0, 10);
-	return order;
+	//return order; //<---------
+
 	for (int argNum = 0; argNum < argc; argNum++) {
 		char* arg = argv[argNum];
 		//-w args are ignored here, that's the command's problem.
@@ -186,7 +193,7 @@ encryptionOrder readArguments(char** argv, int argc) {
 		char* stdCopy = new char[strlen(STANDARD_BITMASK_CODE)];
 		stdCopy = strcpy(stdCopy, STANDARD_BITMASK_CODE);
 		readBitmask(&order, stdCopy);
-		delete [] stdCopy;
+		delete[] stdCopy;
 	}
 
 	return order;
@@ -312,8 +319,8 @@ void readBitmask(encryptionOrder* order, char* mask) {
 void enc_reverseBytes(char* txt, int length) {
 	for (int i = 0; i < length; i++) {
 		char ret = txt[i];
-		for (int j = 0; j < 8; i++) {
-			ret |= txt[i] & (1 << i);
+		for (int j = 0; j < 8; j++) {
+			ret |= txt[i] & (1 << j);
 		}
 		txt[i] = ret;
 	}

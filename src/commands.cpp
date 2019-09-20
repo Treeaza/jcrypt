@@ -24,7 +24,6 @@ bool cmd_help(int argc, char** argv) {
 }
 
 bool cmd_encrypt(int argc, char** argv) {
-	cout << "Hey";
 	if (argc == 0) {
 		//Interpret this as wanting help.
 		printEncHelp();
@@ -49,7 +48,7 @@ bool cmd_encrypt(int argc, char** argv) {
 		file.seekg(0, ios::beg);
 		file.read(txt, length);
 
-		cout << "File loaded, encrypting...\n";
+		cout << "\nFile loaded, encrypting...\n";
 
 		//txt should now contain the entire file in byte form. Now we can go encrypt it.
 		if (encrypt(txt, length, argc - 1, &argv[1])) {
